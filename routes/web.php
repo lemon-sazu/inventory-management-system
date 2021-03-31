@@ -25,5 +25,9 @@ Route::get('/template', function(){
 	return view('layouts.master');
 });
 // Categories
-Route::resource('categories', CategoriesController::class);
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::resource('categories', CategoriesController::class);
+    Route::resource('brands', BrandController::class);
+});
+
 
