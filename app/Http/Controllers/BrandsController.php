@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\brands;
 use Illuminate\Http\Request;
 
+
 class BrandsController extends Controller
 {
     /**
@@ -14,7 +15,8 @@ class BrandsController extends Controller
      */
     public function index()
     {
-        //
+        $brands = Brands::orderby('created_at', 'DESC')->get();
+        return view('brands.index', compact('brands'));
     }
 
     /**
@@ -24,7 +26,7 @@ class BrandsController extends Controller
      */
     public function create()
     {
-        //
+        return view('brands.create');
     }
 
     /**
@@ -35,7 +37,15 @@ class BrandsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' =>'required|min:3|max:50|unique:brands'
+        ]);
+        $brands = new Brands();
+        $name = $request->name;
+        $brands->name =  $name;
+        $brands->save();
+        flash('Brand '. $name .' Created Successfully.')->success();
+        return back();
     }
 
     /**
@@ -55,9 +65,10 @@ class BrandsController extends Controller
      * @param  \App\Models\brands  $brands
      * @return \Illuminate\Http\Response
      */
-    public function edit(brands $brands)
+    public function edit( $id)
     {
-        //
+        $brand = Brands::findOrFail($id);
+        return view('brands.edit', compact('brand'));
     }
 
     /**
@@ -67,9 +78,19 @@ class BrandsController extends Controller
      * @param  \App\Models\brands  $brands
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, brands $brands)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' =>'required|min:3|max:50|unique:categories,name,' . $id
+        ]);
+
+        $brands = Brands::findOrFail($id);
+        
+        $brands->name = $request->name;
+        $brands->save();
+        flash('Brands Update Successfully.')->success();
+        return redirect()->route('brands.index');
+
     }
 
     /**
@@ -78,8 +99,12 @@ class BrandsController extends Controller
      * @param  \App\Models\brands  $brands
      * @return \Illuminate\Http\Response
      */
-    public function destroy(brands $brands)
+    public function destroy($id)
     {
-        //
+        $brand = Brands::findOrFail($id);
+        $brand->delete();
+
+        flash('Brand Delete Successfully.')->success();
+        return redirect()->route('brands.index');
     }
 }
