@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\brands;
+
 use Illuminate\Http\Request;
 
 
@@ -81,7 +82,7 @@ class BrandsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' =>'required|min:3|max:50|unique:categories,name,' . $id
+            'name' =>'required|min:3|max:50|unique:brands,name,' . $id
         ]);
 
         $brands = Brands::findOrFail($id);

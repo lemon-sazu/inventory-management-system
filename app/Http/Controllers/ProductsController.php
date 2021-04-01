@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Size;
-
 use Illuminate\Http\Request;
 
-
-
-class SizesController extends Controller
+class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +13,7 @@ class SizesController extends Controller
      */
     public function index()
     {
-        $sizes = Size::orderby('created_at', 'DESC')->get();
-        return view('sizes.index', compact('sizes'));
+        //
     }
 
     /**
@@ -28,7 +23,7 @@ class SizesController extends Controller
      */
     public function create()
     {
-        return view('sizes.create');
+        //
     }
 
     /**
@@ -39,15 +34,7 @@ class SizesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'size' =>'required|min:3|max:50|unique:sizes'
-        ]);
-        $size = new Size();
-        $name = $request->size;
-        $size->size =  $name;
-        $size->save();
-        flash('Sizes '. $name .' Created Successfully.')->success();
-        return back();
+        //
     }
 
     /**
@@ -69,8 +56,7 @@ class SizesController extends Controller
      */
     public function edit($id)
     {
-        $size = Size::findOrFail($id);
-        return view('sizes.edit', compact('size'));
+        //
     }
 
     /**
@@ -82,16 +68,7 @@ class SizesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'size' =>'required|min:3|max:50|unique:sizes,size,' . $id
-        ]);
-
-        $size = Size::findOrFail($id);
-        
-        $size->size = $request->size;
-        $size->save();
-        flash('Sizes Update Successfully.')->success();
-        return redirect()->route('sizes.index');
+        //
     }
 
     /**
@@ -102,9 +79,6 @@ class SizesController extends Controller
      */
     public function destroy($id)
     {
-        $size = Size::findOrFail($id);
-        $size->delete();
-        flash('Sizes Delete Successfully.')->success();
-        return redirect()->back();
+        //
     }
 }

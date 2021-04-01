@@ -12,8 +12,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-use \App\Http\Controllers\CategoriesController;
-use \App\Http\Controllers\BrandsController;
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\BrandsController;
+use App\Http\Controllers\SizesController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,6 +31,7 @@ Route::get('/template', function(){
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('categories', CategoriesController::class);
     Route::resource('brands', BrandsController::class);
+    Route::resource('sizes', SizesController::class);
 });
 
 
