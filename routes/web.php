@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\BrandsController;
 use App\Http\Controllers\SizesController;
+use App\Http\Controllers\ProductsController;
 
 
 Route::get('/', function () {
@@ -30,8 +31,11 @@ Route::get('/template', function(){
 // Categories
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('categories', CategoriesController::class);
+    Route::get('/api/categories', [CategoriesController::class, 'getCategoriesJson']);
     Route::resource('brands', BrandsController::class);
+    Route::get('/api/brands', [BrandsController::class, 'getBrandsJson']);
     Route::resource('sizes', SizesController::class);
+    Route::resource('products', ProductsController::class);
 });
 
 

@@ -28,7 +28,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 @include('layouts.partials._footer')
 
 <!-- REQUIRED SCRIPTS -->
-
+</div>
+<!-- ./wrapper -->
 <!-- jQuery -->
 @include('layouts.partials/_footer_script')
 
