@@ -17,8 +17,8 @@
     </div><!-- /.container-fluid -->
   </div>
 
-  <div class="col-lg-12">
+ 
    <product-add></product-add>
-  </div>
+
 
 @endsection

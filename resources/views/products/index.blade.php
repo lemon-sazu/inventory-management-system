@@ -34,7 +34,7 @@
                 </tr>
             </thead>
             <tbody>
-             <?php var_dump($products); ?>
+
               @if ($products)
               @foreach($products as $key=>$product)
 
