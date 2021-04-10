@@ -1,7 +1,8 @@
 <template>
   <form method="POST" role="rorm" @submit.prevent="submitForm">
-    <div class="row">
+    <div class="row ml-4 mr-4">
       <div class="col-md-6">
+        <ShowError></ShowError>
         <div class="card card-primary card-outline">
           <div class="card-header">
             <h5 class="m-0">Create Product</h5>
@@ -17,7 +18,6 @@
                 <Select2
                   v-model="form.category_id"
                   :options="categories"
-                  name="category"
                   id="category"
                   :settings="{ placeholder: 'Select Category' }"
                   :key="form.category_id"
@@ -63,6 +63,7 @@
                   class="form-control"
                   placeholder="Image"
                   id="image"
+                  @change="selectImage"
                 />
               </div>
               <div class="form-group">
@@ -192,18 +193,19 @@ import { mapGetters } from "vuex";
 import store from "../../store";
 import * as actions from "../../store/action-types";
 import Select2 from "v-select2-component";
+import ShowError from "./../utils/ShowError";
 export default {
-  components: { Select2 },
+  components: { Select2, ShowError },
   data() {
     return {
       form: {
-        category_id: 0,
-        brand_id: 0,
+        category_id: "",
+        brand_id: "",
         sku: "",
         name: "",
         image: "",
-        cost_price: 0,
-        retail_price: 0,
+        cost_price: "",
+        retail_price: "",
         year: "",
         description: "",
         status: 1,
@@ -211,7 +213,7 @@ export default {
           {
             size_id: "",
             location: "",
-            quantity: 0,
+            quantity: "",
           },
         ],
       },
@@ -231,6 +233,9 @@ export default {
     store.dispatch(actions.GET_SIZES);
   },
   methods: {
+    selectImage(e) {
+      this.form.image = e.target.files[0];
+    },
     addMoreSizes() {
       let item = {
         size_id: "",
@@ -243,7 +248,20 @@ export default {
       this.form.items.splice(index);
     },
     submitForm() {
-      console.log(this.form);
+      let data = new FormData();
+      data.append("category_id", this.form.category_id);
+      data.append("brand_id", this.form.brand_id);
+      data.append("sku", this.form.sku);
+      data.append("name", this.form.name);
+      data.append("image", this.form.image);
+      data.append("cost_price", this.form.cost_price);
+      data.append("retail_price", this.form.retail_price);
+      data.append("year", this.form.year);
+      data.append("description", this.form.description);
+      data.append("status", this.form.status);
+      data.append("items", this.form.items);
+
+      store.dispatch(actions.ADD_PRODUCTS, data);
     },
   },
 };

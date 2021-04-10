@@ -30,6 +30,7 @@
                 <tr>
                     <th>#Sn</th>
                     <th>Name</th>
+                    <th>User Id</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -41,13 +42,14 @@
                   <tr> 
                   <td>{{++$key}}</td>
                   <td>{{$product->name ?? 'Create product'}}</td>
+                  <td>{{$product->user_id ?? 'Null'}}</td>
                   <td>
-                    <a href="{{ route('products.edit', $cat->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                    <a href="{{ route('products.edit', $product->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
                   
-                    <a href="javascript:;" class="btn btn-sm btn-warning delete_btn_cls" data-form-id="product-delete-{{$cat->id}}">
+                    <a href="javascript:;" class="btn btn-sm btn-warning delete_btn_cls" data-form-id="product-delete-{{$product->id}}">
                       <i class="fas fa-trash-alt"></i></a>
 
-                      <form action="{{route('products.destroy', $cat->id)}}" id="product-delete-{{$product->id}}" method="POST">
+                      <form action="{{route('products.destroy', $product->id)}}" id="product-delete-{{$product->id}}" method="POST">
                       @csrf
                       @method('DELETE')
                       </form>

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Models\Product;
+
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ProductsController extends Controller
 {
@@ -18,6 +22,7 @@ class ProductsController extends Controller
         $products = Product::all();
         return view('products.index', compact('products'));
         // return $products;
+        // return var_dump($products);
     }
 
     /**
@@ -38,7 +43,49 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+     
+        $validate = Validator::make($request->all(), [
+            'category_id' => 'required|numeric',
+            'brand_id' => 'required|numeric',
+            'sku' => 'required|string|max:100|unique:products',
+            'name' => 'required|string|max:200',
+            'image' => 'required|image|mimes:jpeg,jpg,png|max:200',
+            'cost_price' => 'required|numeric',
+            'retail_price' => 'required|numeric',
+            'year' => 'required',
+            'description' => 'required|max:200',
+            'status' => 'required|numeric'
+        ]);
+
+        if($validate->fails()){
+            return response()->json([
+                'success' => false,
+                'errors' => $validate->errors()
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        $product = new Product();
+        $product-> user_id = Auth::id();
+        $product->category_id = $request->category_id;
+        $product->brand_id = $request->brand_id;
+        $product->sku = $request->sku;
+        $product->name = $request->name;
+        $product->cost_price = $request->cost_price;
+        $product->retail_price = $request->retail_price;
+        $product->year = $request->year;
+        $product->description = $request->description;
+        $product->status = $request->status;
+// ssssave file is has 
+        if($request->hasFile('image')){
+            $image = $request->image;
+            $name = Str::random(60) . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/product_images', $name);
+            $product->image = $name;
+        }
+
+        // save products
+        $product->save();
+        return $request->all();
     }
 
     /**
