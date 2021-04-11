@@ -7,7 +7,9 @@ use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Models\ProductSizeStock;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProductsController extends Controller
@@ -19,9 +21,10 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        return view('products.index', compact('products'));
+        $products = Product::with(['category', 'brand'])->get();
+
         // return $products;
+        return view('products.index', compact('products'));
         // return var_dump($products);
     }
 
@@ -85,7 +88,19 @@ class ProductsController extends Controller
 
         // save products
         $product->save();
-        return $request->all();
+
+        foreach (json_decode($request->items) as $item) {
+            $size_stock = new ProductSizeStock();
+            $size_stock->product_id = $product->id;
+            $size_stock->size_id = $item->size_id;
+            $size_stock->location = $item->location;
+            $size_stock->quantity = $item->quantity;
+            $size_stock->save();
+        }
+
+        return response()->json([
+            'success' => true
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -96,7 +111,8 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+         $products = Product::with(['category', 'brand', 'product_size_stock.size'])->where('id', $id)->first();
+        return view('products.show',compact('products'));
     }
 
     /**
@@ -130,6 +146,15 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        
+
+            Storage::delete('public/product_images/'. $product->image);
+            $product->delete();
+            flash('Product Deleted Successfully.')->success();
+            return back();
+
+
+     
     }
 }

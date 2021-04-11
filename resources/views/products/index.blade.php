@@ -17,7 +17,7 @@
     </div><!-- /.container-fluid -->
   </div>
 
-  <div class="col-lg-6">
+  <div class="col-lg-12">
     <div class="card card-primary card-outline">
       <div class="card-header"  style="justify-content:space-between; display:flex">
         <h5 class="m-0">Products List </h5><a href="{{route('products.create')}}" class="btn btn-primary btn-sm "><i class="fa fa-plus"></i></a>
@@ -29,8 +29,11 @@
             <thead>
                 <tr>
                     <th>#Sn</th>
+                    <th>Image</th>
                     <th>Name</th>
-                    <th>User Id</th>
+                    <th>SKU</th>
+                    <th>Category</th>
+                    <th>Brand</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -41,9 +44,13 @@
 
                   <tr> 
                   <td>{{++$key}}</td>
-                  <td>{{$product->name ?? 'Create product'}}</td>
-                  <td>{{$product->user_id ?? 'Null'}}</td>
+                  <td><img height="60" src="{{ asset('storage/product_images/'. $product->image)}}" alt=""></td>
+                  <td>{{$product->name ?? ''}}</td>
+                  <td>{{$product->sku ?? ''}}</td>
+                  <td>{{$product->category->name ?? ''}}</td>
+                  <td>{{$product->brand->name ?? ''}}</td>
                   <td>
+                    <a href="{{ route('products.show', $product->id)}}" class="btn btn-info btn-sm"><i class="fa fa-desktop"></i></a>
                     <a href="{{ route('products.edit', $product->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
                   
                     <a href="javascript:;" class="btn btn-sm btn-warning delete_btn_cls" data-form-id="product-delete-{{$product->id}}">

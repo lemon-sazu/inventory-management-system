@@ -177,7 +177,10 @@
               </div>
             </div>
             <div class="add_button">
-              <button @click="addMoreSizes" class="btn btn-primary btn-sm mt-2">
+              <button
+                @click.prevent="addMoreSizes"
+                class="btn btn-primary btn-sm mt-2"
+              >
                 <i class="fa fa-plus"></i> Add More
               </button>
             </div>
@@ -259,7 +262,7 @@ export default {
       data.append("year", this.form.year);
       data.append("description", this.form.description);
       data.append("status", this.form.status);
-      data.append("items", this.form.items);
+      data.append("items", JSON.stringify(this.form.items));
 
       store.dispatch(actions.ADD_PRODUCTS, data);
     },
