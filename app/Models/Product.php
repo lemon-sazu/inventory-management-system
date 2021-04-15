@@ -11,13 +11,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Product extends Model
 {
     use HasFactory;
-    protected $appends = ['product_image'];
+    protected $appends = ['product_image', 'text'];
 
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 0;
 
     public function getProductImageAttribute(){
         return asset('storage/product_images/'. $this->image);
+    }
+    public function getTextAttribute(){
+        return $this->name;
     }
 
 

@@ -25,7 +25,7 @@
       @include('flash::message')
       <div class="card-body">
 
-          <table id="example" class="table table-bordered table-hover dataTable dtr-inline" style="width:100%">
+          <table class="table table-bordered table-hover  dtr-inline" style="width:100%">
 
               @if ($products)
               <tr>

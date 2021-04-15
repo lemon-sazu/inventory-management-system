@@ -9,6 +9,7 @@ import categories from './module/categories';
 import brands from './module/brands';
 import sizes from './module/sizes';
 import products from './module/products';
+import stocks from './module/stocks';
 
 export default new Vuex.Store({
     modules: {
@@ -16,6 +17,7 @@ export default new Vuex.Store({
         categories,
         brands,
         sizes,
-        products
+        products,
+        stocks
     }
 })

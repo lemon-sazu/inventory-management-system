@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Size;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -19,4 +20,5 @@ class ProductSizeStock extends Model
     {
         return $this->belongsTo(Size::class);
     }
+
 }

@@ -214,8 +214,14 @@ class ProductsController extends Controller
             $product->delete();
             flash('Product Deleted Successfully.')->success();
             return back();
-
-
-     
     }
+        // HANDLE AJAX REQUEST 
+        public function getProductsJson(){
+            $products = Product::with(['product_size_stock.size'])->get();
+    
+            return response()->json([
+                'success' => true,
+                'data' => $products
+            ], Response::HTTP_OK);
+        }
 }

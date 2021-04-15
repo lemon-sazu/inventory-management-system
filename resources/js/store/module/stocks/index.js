@@ -1,14 +1,15 @@
 import actions from './actions';
+import getters from './getters';
 import mutations from './mutations';
-import getters from './getters'
 
 const state = {
-    products: []
+    stocks: []
 }
+
 
 export default {
     state,
-    getters,
     actions,
+    getters,
     mutations
 }
