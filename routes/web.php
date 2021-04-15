@@ -12,11 +12,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\BrandsController;
 use App\Http\Controllers\SizesController;
-use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\BrandsController;
 use App\Http\Controllers\StocksController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ReturnProductsController;
 
 
 Route::get('/', function () {
@@ -47,6 +48,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('stocks', [StocksController::class, 'stock'])->name('stock');
     Route::post('stocks', [StocksController::class, 'stockSubmit'])->name('stockSubmit');
     Route::get('stocks/history', [StocksController::class, 'history'])->name('stockHistory');
+
+    Route::get('return_products', [ReturnProductsController::class, 'returnProduct'])->name('returnProduct');
+    Route::post('return_product', [ReturnProductsController::class, 'returnProductSubmit'])->name('returnProductSubmit');
+    Route::get('return_products/history', [ReturnProductsController::class, 'history'])->name('returnProductHistory');
 });
 
 

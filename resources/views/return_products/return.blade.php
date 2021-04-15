@@ -10,7 +10,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-            <li class="breadcrumb-item active">Stock Manage</li>
+            <li class="breadcrumb-item active">Return Product</li>
           </ol>
         </div>
       </div><!-- /.row -->
@@ -18,7 +18,7 @@
   </div>
 
   @include('flash::message')
-   <stock-manage></stock-manage>
+   <return-product></return-product>
 
 
 @endsection
