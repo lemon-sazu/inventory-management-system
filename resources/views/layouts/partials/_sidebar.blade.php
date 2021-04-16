@@ -12,17 +12,6 @@
         </div>
       </div>
 
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -31,87 +20,85 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+             
               <p>
-                Starter Pages
+                Menus
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('user.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{route('dashboard')}}" class="nav-link {{request()->is('dashboard*') ? 'active' : ''}}">
+                  <i class="fas fa-home nav-icon"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('user.index')}}" class="nav-link {{request()->is('user*') ? 'active' : ''}}">
+                  <i class="fas fa-users nav-icon"></i>
                   <p>Users</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="{{route('products.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{route('products.index')}}" class="nav-link {{request()->is('products*') ? 'active' : ''}}">
+                  <i class="fas fa-list nav-icon"></i>
                   <p>Products</p>
                 </a>
               </li>
      
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('categories.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{route('categories.index')}}" class="nav-link {{request()->is('categories*') ? 'active' : ''}}">
+                  <i class="fas fa-list nav-icon"></i>
                   <p>Categories</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('brands.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{route('brands.index')}}" class="nav-link {{request()->is('brands*') ? 'active' : ''}}">
+                  <i class="fas fa-list nav-icon"></i>
                   <p>Brands</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('sizes.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{route('sizes.index')}}" class="nav-link {{request()->is('sizes*') ? 'active' : ''}}">
+                  <i class="fas fa-list nav-icon"></i>
                   <p>Sizes</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('stock')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{route('stock')}}" class="nav-link {{request()->is('stocks') ? 'active' : ''}}">
+                  <i class="fas fa-cart-plus nav-icon"></i>
                   <p>Stocks</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('stockHistory')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{route('stockHistory')}}" class="nav-link {{request()->is('stocks/history') ? 'active' : ''}}">
+                  <i class="far fa-file-alt nav-icon"></i>
                   <p>Stocks History</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('returnProduct')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{route('returnProduct')}}" class="nav-link  {{request()->is('return_products') ? 'active' : ''}}">
+                  <i class="fas fa-list nav-icon"></i>
                   <p>Return Product</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('returnProductHistory')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{route('returnProductHistory')}}" class="nav-link  {{request()->is('return_products/history') ? 'active' : ''}}">
+                  <i class="far fa-file-alt nav-icon"></i>
                   <p>Product Return History</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('users.logout')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{route('users.logout')}}" class="nav-link ">
+                  <i class="fas fa-sign-out-alt  nav-icon"></i>
                   <p>Logout</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Simple Link
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
+     
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
