@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\SizesController;
 use App\Http\Controllers\BrandsController;
 use App\Http\Controllers\StocksController;
@@ -30,8 +31,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('/template', function(){
 	return view('layouts.master');
 });
+Route::get('logout', [UserController::class, 'logout'])->name('users.logout');
 // Categories
 Route::middleware(['auth:sanctum'])->group(function () {
+
+    Route::resource('user', UserController::class);
+ 
 
     Route::resource('categories', CategoriesController::class);
     Route::get('/api/categories', [CategoriesController::class, 'getCategoriesJson']);
